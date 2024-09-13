@@ -20,8 +20,6 @@ function PostCreateForm() {
   });
   const { recipe_name, ingredients, instructions } = postData;
 
-  const [formValidated, setFormValidated] = useState(false);
-
   const history = useHistory();
 
   const handleChange = (event) => {
@@ -33,8 +31,8 @@ function PostCreateForm() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    setFormValidated(true);
 
+    // Client-side validation
     const validationErrors = {};
 
     if (!recipe_name.trim()) {
@@ -52,6 +50,7 @@ function PostCreateForm() {
       return;
     }
 
+    // If validation passes, proceed with form submission
     const formData = new FormData();
 
     formData.append('recipe_name', recipe_name);
@@ -70,7 +69,7 @@ function PostCreateForm() {
   };
 
   return (
-    <Form noValidate validated={formValidated} onSubmit={handleSubmit}>
+    <Form noValidate onSubmit={handleSubmit}>
       <Container
         style={{ maxWidth: '600px', width: '100%', height: '100vh', margin: '0 auto', padding: '15px' }}
         className={`${appStyles.Content} ${styles.formWrapper}`}
@@ -84,55 +83,48 @@ function PostCreateForm() {
               value={recipe_name}
               onChange={handleChange}
               placeholder="Enter the recipe name"
-              isInvalid={!!errors.recipe_name}
-              className={styles.customTextarea}
+              style={{ marginBottom: '0' }}
             />
-            <Form.Control.Feedback type="invalid">
-              {errors.recipe_name}
-            </Form.Control.Feedback>
+            {errors.recipe_name && (
+              <Alert variant="warning" style={{ marginTop: '0.5rem' }}>
+                {errors.recipe_name}
+              </Alert>
+            )}
           </Form.Group>
 
-          <div className={styles.textFieldContainer}>
-            <Form.Group className={styles.customFormGroup}>
-              <Form.Label>Ingredients</Form.Label>
-              <Form.Control
-                as="textarea"
-                name="ingredients"
-                value={ingredients}
-                onChange={handleChange}
-                placeholder="List the ingredients"
-                isInvalid={!!errors.ingredients}
-                className={`${styles.customTextarea} ${styles.scrollableTextarea}`}
-                style={{ minHeight: '100px' }}
-              />
-              <Form.Control.Feedback type="invalid">
+          <Form.Group className={styles.customFormGroup}>
+            <Form.Label>Ingredients</Form.Label>
+            <Form.Control
+              as="textarea"
+              name="ingredients"
+              value={ingredients}
+              onChange={handleChange}
+              placeholder="List the ingredients"
+              style={{ minHeight: '100px', marginBottom: '0' }}
+            />
+            {errors.ingredients && (
+              <Alert variant="warning" style={{ marginTop: '0.5rem' }}>
                 {errors.ingredients}
-              </Form.Control.Feedback>
-            </Form.Group>
+              </Alert>
+            )}
+          </Form.Group>
 
-            <Form.Group className={styles.customFormGroup}>
-              <Form.Label>Instructions</Form.Label>
-              <Form.Control
-                as="textarea"
-                name="instructions"
-                value={instructions}
-                onChange={handleChange}
-                placeholder="Write the instructions"
-                isInvalid={!!errors.instructions}
-                className={`${styles.customTextarea} ${styles.scrollableTextarea}`}
-                style={{ minHeight: '150px' }}
-              />
-              <Form.Control.Feedback type="invalid">
+          <Form.Group className={styles.customFormGroup}>
+            <Form.Label>Instructions</Form.Label>
+            <Form.Control
+              as="textarea"
+              name="instructions"
+              value={instructions}
+              onChange={handleChange}
+              placeholder="Write the instructions"
+              style={{ minHeight: '150px', marginBottom: '0' }}
+            />
+            {errors.instructions && (
+              <Alert variant="warning" style={{ marginTop: '0.5rem' }}>
                 {errors.instructions}
-              </Form.Control.Feedback>
-            </Form.Group>
-          </div>
-
-          {errors?.content?.map((message, idx) => (
-            <Alert variant="warning" key={idx}>
-              {message}
-            </Alert>
-          ))}
+              </Alert>
+            )}
+          </Form.Group>
 
           <Button
             className={`${btnStyles.Button} ${btnStyles.Dark}`}
