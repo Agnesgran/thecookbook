@@ -1,13 +1,10 @@
 import React, { useState } from "react";
-
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Container from "react-bootstrap/Container";
-
 import Upload from "../../assets/upload.png";
-
 import styles from "../../styles/PostCreateEditForm.module.css";
 import appStyles from "../../App.module.css";
 import btnStyles from "../../styles/Button.module.css";
@@ -18,11 +15,12 @@ function PostCreateForm() {
   const [errors, setErrors] = useState({});
 
   const [postData, setPostData] = useState({
-    title: "",
-    content: "",
+    recipe_name: "",
+    ingredients: "",
+    instructions: "",
     image: "",
   });
-  const { title, content, image } = postData;
+  const { recipe_name, ingredients, instructions, image } = postData;
 
   const handleChange = (event) => {
     setPostData({
@@ -43,34 +41,52 @@ function PostCreateForm() {
 
   const textFields = (
     <div className="text-center">
-      <Form.Group>
-        <Form.Label>Title</Form.Label>
+      <Form.Group className={styles.customFormGroup}>
+        <Form.Label>Recipe Name</Form.Label>
         <Form.Control
           type="text"
-          name="title"
-          value={title}
+          name="recipe_name"
+          value={recipe_name}
           onChange={handleChange}
+          placeholder="Enter the recipe name"
+          className={styles.customTextarea}
         />
       </Form.Group>
-      <Form.Group>
-        <Form.Label>Content</Form.Label>
+
+      <Form.Group className={styles.customFormGroup}>
+        <Form.Label>Ingredients</Form.Label>
         <Form.Control
           as="textarea"
           rows={6}
-          name="content"
-          value={content}
+          name="ingredients"
+          value={ingredients}
           onChange={handleChange}
+          placeholder="List the ingredients"
+          className={styles.customTextarea}
+        />
+      </Form.Group>
+
+      <Form.Group className={styles.customFormGroup}>
+        <Form.Label>Instructions</Form.Label>
+        <Form.Control
+          as="textarea"
+          rows={6}
+          name="instructions"
+          value={instructions}
+          onChange={handleChange}
+          placeholder="Write the instructions"
+          className={styles.customTextarea}
         />
       </Form.Group>
 
       <Button
-        className={`${btnStyles.Button} ${btnStyles.Blue}`}
+        className={`${btnStyles.Button} ${btnStyles.Dark}`}
         onClick={() => {}}
       >
-        cancel
+        Cancel
       </Button>
-      <Button className={`${btnStyles.Button} ${btnStyles.Blue}`} type="submit">
-        create
+      <Button className={`${btnStyles.Button} ${btnStyles.Dark}`} type="submit">
+        Create Recipe
       </Button>
     </div>
   );
@@ -90,7 +106,7 @@ function PostCreateForm() {
                   </figure>
                   <div>
                     <Form.Label
-                      className={`${btnStyles.Button} ${btnStyles.Blue} btn`}
+                      className={`${btnStyles.Button} ${btnStyles.Dark} btn`} // Change this color too
                       htmlFor="image-upload"
                     >
                       Change the image

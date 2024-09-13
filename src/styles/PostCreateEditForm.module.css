@@ -1,3 +1,16 @@
 .Container {
     min-height: 343px;
+    background-color: #EBE8E8;
+  }
+
+  .customTextarea {
+    background-color: #F3F3F3;
+  }
+
+  .customInput {
+    background-color: #EBE8E8;
+  }
+
+  .customFormGroup {
+    background-color: #EBE8E8;
   }
