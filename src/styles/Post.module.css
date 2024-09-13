@@ -12,13 +12,13 @@
   }
   
   .Heart {
-    color: #D54343 !important;
+    color: #D54343;
   }
   
   .Heart:hover {
-    color: #D54343;
+    color: #BCC397;
   }
   
   .HeartOutline:hover {
-    color: #D54343;
+    color: #BCC397;
   }
