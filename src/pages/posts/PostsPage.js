@@ -62,6 +62,7 @@ function PostsPage({ message, filter = "" }) {
             placeholder="Search posts"
           />
         </Form>
+
         {hasLoaded ? (
           <>
             {posts.results.length ? (
