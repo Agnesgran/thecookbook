@@ -38,10 +38,13 @@ const SignUpForm = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      await axios.post("/dj-rest-auth/registration/", signUpData);
-      history.push("/signin");
+      const response = await axios.post("/dj-rest-auth/registration/", signUpData);
+      // If registration is successful, redirect to signin
+      if (response.status === 201) {
+        history.push("/signin");
+      }
     } catch (err) {
-      setErrors(err.response?.data);
+      setErrors(err.response?.data || {});
     }
   };
 
@@ -49,7 +52,7 @@ const SignUpForm = () => {
     <Row className={styles.Row}>
       <Col className="my-auto py-2 p-md-2" md={6}>
         <Container className={`${appStyles.Content} p-4 `}>
-          <h1 className={styles.Header}>sign up</h1>
+          <h1 className={styles.Header}>Join our Cookbook</h1>
 
           <Form onSubmit={handleSubmit}>
             <Form.Group controlId="username">
@@ -129,7 +132,7 @@ const SignUpForm = () => {
       >
         <Image
           className={`${appStyles.FillerImage}`}
-          src={"https://codeinstitute.s3.amazonaws.com/AdvancedReact/hero2.jpg"}
+          src={"https://res.cloudinary.com/dukbrbfs8/image/upload/v1725203725/signupimgsmall_fmwiq3.png"}
         />
       </Col>
     </Row>
