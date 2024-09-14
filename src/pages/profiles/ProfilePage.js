@@ -31,7 +31,7 @@ function ProfilePage() {
   const currentUser = useCurrentUser();
   const { id } = useParams();
 
-  const { setProfileData, handleFollow } = useSetProfileData();
+  const { setProfileData, handleFollow, handleUnfollow } = useSetProfileData();
   const { pageProfile } = useProfileData();
 
   const [profile] = pageProfile.results;
@@ -84,7 +84,6 @@ function ProfilePage() {
               <div>following</div>
             </Col>
           </Row>
-          {profile?.cooking_level && ( <p className="mt-2">Cooking Level: {profile.cooking_level}</p> )}
         </Col>
         <Col lg={3} className="text-lg-right">
           {currentUser &&
@@ -92,7 +91,7 @@ function ProfilePage() {
             (profile?.following_id ? (
               <Button
                 className={`${btnStyles.Button} ${btnStyles.BlackOutline}`}
-                onClick={() => {}}
+                onClick={() => handleUnfollow(profile)}
               >
                 unfollow
               </Button>
