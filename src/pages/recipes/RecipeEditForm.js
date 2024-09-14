@@ -96,4 +96,3 @@ function RecipeEditForm() {
 }
 
 export default RecipeEditForm;
-RecipeDetail.js
