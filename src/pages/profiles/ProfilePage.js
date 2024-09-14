@@ -1,16 +1,23 @@
 import React, { useEffect, useState } from "react";
+
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 import Container from "react-bootstrap/Container";
+
 import Asset from "../../components/Asset";
+
 import styles from "../../styles/ProfilePage.module.css";
 import appStyles from "../../App.module.css";
 import btnStyles from "../../styles/Button.module.css";
+
 import PopularProfiles from "./PopularProfiles";
 import { useCurrentUser } from "../../contexts/CurrentUserContext";
 import { useParams } from "react-router";
 import { axiosReq } from "../../api/axiosDefaults";
-import { useProfileData, useSetProfileData } from "../../contexts/ProfileDataContext";
+import {
+  useProfileData,
+  useSetProfileData,
+} from "../../contexts/ProfileDataContext";
 import { Button, Image } from "react-bootstrap";
 import InfiniteScroll from "react-infinite-scroll-component";
 import Post from "../posts/Post";
@@ -23,8 +30,10 @@ function ProfilePage() {
 
   const currentUser = useCurrentUser();
   const { id } = useParams();
-  const setProfileData = useSetProfileData();
+
+  const { setProfileData, handleFollow } = useSetProfileData();
   const { pageProfile } = useProfileData();
+
   const [profile] = pageProfile.results;
   const is_owner = currentUser?.username === profile?.owner;
 
@@ -75,9 +84,7 @@ function ProfilePage() {
               <div>following</div>
             </Col>
           </Row>
-          {profile?.cooking_level && (
-            <p className="mt-2">Cooking Level: {profile.cooking_level}</p>
-          )}
+          {profile?.cooking_level && ( <p className="mt-2">Cooking Level: {profile.cooking_level}</p> )}
         </Col>
         <Col lg={3} className="text-lg-right">
           {currentUser &&
@@ -92,7 +99,7 @@ function ProfilePage() {
             ) : (
               <Button
                 className={`${btnStyles.Button} ${btnStyles.Black}`}
-                onClick={() => {}}
+                onClick={() => handleFollow(profile)}
               >
                 follow
               </Button>
