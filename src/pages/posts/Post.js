@@ -1,7 +1,12 @@
 import React from "react";
 import styles from "../../styles/Post.module.css";
 import { useCurrentUser } from "../../contexts/CurrentUserContext";
-import { Card, Media, OverlayTrigger, Tooltip } from "react-bootstrap";
+
+import Card from "react-bootstrap/Card";
+import Media from "react-bootstrap/Media";
+import OverlayTrigger from "react-bootstrap/OverlayTrigger";
+import Tooltip from "react-bootstrap/Tooltip";
+
 import { Link, useHistory } from "react-router-dom";
 import Avatar from "../../components/Avatar";
 import { axiosRes } from "../../api/axiosDefaults";
@@ -16,9 +21,9 @@ const Post = (props) => {
     comments_count,
     likes_count,
     like_id,
-    recipe_name,
-    ingredients,
-    instructions,
+    title,
+    content,
+    image,
     updated_at,
     postPage,
     setPosts,
@@ -37,7 +42,7 @@ const Post = (props) => {
       await axiosRes.delete(`/posts/${id}/`);
       history.goBack();
     } catch (err) {
-    //   console.log(err);
+      // console.log(err);
     }
   };
 
@@ -53,7 +58,7 @@ const Post = (props) => {
         }),
       }));
     } catch (err) {
-    //   console.log(err);
+      // console.log(err);
     }
   };
 
@@ -69,7 +74,7 @@ const Post = (props) => {
         }),
       }));
     } catch (err) {
-    //   console.log(err);
+      // console.log(err);
     }
   };
 
@@ -80,7 +85,7 @@ const Post = (props) => {
           <Link to={`/profiles/${profile_id}`}>
             <Avatar src={profile_image} height={55} />
             {owner}
-            </Link>
+          </Link>
           <div className="d-flex align-items-center">
             <span>{updated_at}</span>
             {is_owner && postPage && (
@@ -92,18 +97,12 @@ const Post = (props) => {
           </div>
         </Media>
       </Card.Body>
+      <Link to={`/posts/${id}`}>
+        <Card.Img src={image} alt={title} />
+      </Link>
       <Card.Body>
-        {recipe_name && <Card.Title className="text-center">{recipe_name}</Card.Title>}
-        {ingredients && (
-          <Card.Text>
-            <strong>Ingredients:</strong> {ingredients}
-          </Card.Text>
-        )}
-        {instructions && (
-          <Card.Text>
-            <strong>Instructions:</strong> {instructions}
-          </Card.Text>
-        )}
+        {title && <Card.Title className="text-center">{title}</Card.Title>}
+        {content && <Card.Text>{content}</Card.Text>}
         <div className={styles.PostBar}>
           {is_owner ? (
             <OverlayTrigger

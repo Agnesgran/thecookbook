@@ -15,10 +15,9 @@ import UsernameForm from "./pages/profiles/UsernameForm";
 import UserPasswordForm from "./pages/profiles/UserPasswordForm";
 import ProfileEditForm from "./pages/profiles/ProfileEditForm";
 import NotFound from "./components/NotFound";
-import RecipeList from "./pages/recipes/RecipeList";
-import RecipeCreateForm from "./pages/recipes/RecipeCreateForm";
-import RecipeEditForm from "./pages/recipes/RecipeEditForm";
-import RecipeDetail from "./pages/recipes/RecipeDetail";
+import Recipe from "./pages/recipes/Recipe";
+import RecipesPage from "./pages/recipes/RecipesPage";
+
 
 function App() {
   const currentUser = useCurrentUser();
@@ -61,10 +60,9 @@ function App() {
           <Route exact path="/posts/create" render={() => <PostCreateForm />} />
           <Route exact path="/posts/:id" render={() => <PostPage />} />
           <Route exact path="/posts/:id/edit" render={() => <PostEditForm />} />
-          <Route exact path="/recipes" render={() => <RecipeList />} />
-          <Route exact path="/recipes/create" render={() => <RecipeCreateForm />} />
-          <Route exact path="/recipes/:id/edit" render={() => <RecipeEditForm />} />
-          <Route exact path="/recipes/:id" render={() => <RecipeDetail />} />
+          <Route exact path="/recipes" render={() => <RecipesPage />} />
+          <Route exact path="/recipes/:id" render={() => <Recipe />} />
+          <Route exact path="/recipes/:id/edit" render={() => <Recipe />} />
           <Route exact path="/profiles/:id" render={() => <ProfilePage />} />
           <Route
             exact
