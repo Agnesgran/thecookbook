@@ -5,12 +5,12 @@
   }
   
   .Main {
-    padding-top: 81px;
+    padding-top: 100px;
   }
 
   .Content {
     background-color: #EBE8E8;
-    padding: 10px;
+    padding: 40px;
     border-radius: 2px;
     border: 1px solid #dadadf;
   }
